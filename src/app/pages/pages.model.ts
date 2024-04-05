@@ -4,4 +4,6 @@ export interface Page {
     content: string;
     bookId: number;
     categories:Category[];
+    createdAt:Datetime;
+    updatedAt:Datetime;
   }
