@@ -1,0 +1,33 @@
+<div *ngFor="let page of pages">
+  <h3>{{ page.title }}</h3>
+  <p>{{ page.content }}</p>
+  <div *ngIf="page.categories.length > 0">
+    <strong>Catégories:</strong>
+    <ul>
+      <li *ngFor="let category of page.categories">{{ category.name }}</li>
+    </ul>
+  </div>
+  <button (click)="startEditPage(page)">Modifier</button>
+  <button (click)="deletePage(page.id)">Supprimer</button>
+</div>
+
+<div *ngIf="isEditing">
+  <form (submit)="updatePage()">
+    <input type="text" [(ngModel)]="selectedPage.title">
+    <textarea [(ngModel)]="selectedPage.content"></textarea>
+    <select multiple [(ngModel)]="selectedPage.categories" name="categories">
+      <option *ngFor="let category of categories" [ngValue]="category">{{ category.name }}</option>
+    </select>
+    <button type="submit">Enregistrer</button>
+    <button type="button" (click)="cancelEditPage()">Annuler</button>
+  </form>
+</div>
+
+<form (submit)="createPage()">
+  <input type="text" [(ngModel)]="newPage.title" placeholder="Titre">
+  <textarea [(ngModel)]="newPage.content" placeholder="Contenu"></textarea>
+  <select multiple [(ngModel)]="newPage.categories" name="categories">
+    <option *ngFor="let category of categories" [ngValue]="category">{{ category.name }}</option>
+  </select>
+  <button type="submit">Ajouter</button>
+</form>
