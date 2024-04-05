@@ -1,36 +1,35 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
-import { HttpProviderService } from "../Service/http-provider.service";
-import { WebApiService } from "../Service/web-api.service";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { WebApiService } from '../Service/web-api.service';
 
 @Component({
-  selector: "app-view-books",
-  templateUrl: "./view-books.component.html",
-  styleUrls: ["./view-books.components.css"]
+  selector: 'app-view-books',
+  templateUrl: './view-books.component.html',
+  styleUrls: ['./view-books.component.css']
 })
+export class ViewBooksComponent implements OnInit {
+  bookId!: string; // Ajouter le signe '!' pour indiquer à TypeScript que la propriété sera initialisée dans le ngOnInit ou par une route active
+  book: any;
 
-export class ViewbooksComponent implements OnInit {
+  constructor(
+    private route: ActivatedRoute,
+    private webApiService: WebApiService
+  ) { }
 
-  booksId: any;
-  booksDetail : any= [];
-   
-  constructor(public webApiService: WebApiService, private route: ActivatedRoute, private httpProvider : HttpProviderService) { }
-  
   ngOnInit(): void {
-    this.booksId = this.route.snapshot.params["booksId"];      
-    this.getbooksDetailById();
+    this.bookId = this.route.snapshot.paramMap.get('BooksId') || ''; // Utiliser l'opérateur de coalescence nulle pour assurer que bookId est toujours une chaîne de caractères
+    this.getBookDetails();
   }
 
-  getbooksDetailById() {       
-    this.httpProvider.getbooksDetailById(this.booksId).subscribe((data : any) => {      
-      if (data != null && data.body != null) {
-        var resultData = data.body;
-        if (resultData) {
-          this.booksDetail = resultData;
+  getBookDetails(): void {
+    this.webApiService.get('https://66100fb60640280f219c3444.mockapi.io/api/v1/book/' + this.bookId)
+      .subscribe(
+        (response: any) => {
+          this.book = response.body;
+        },
+        (error: any) => {
+          console.error('Une erreur est survenue lors de la récupération des détails du livre :', error);
         }
-      }
-    },
-    (error :any)=> { }); 
+      );
   }
-
 }

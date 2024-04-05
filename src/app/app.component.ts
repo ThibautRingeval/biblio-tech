@@ -1,14 +1,18 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [CommonModule, RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'biblio-tech';
+  
+  constructor(private router: Router) {}
+
+  // Définition de la méthode HomeClick()
+  HomeClick() {
+    // Rediriger l'utilisateur vers la page d'accueil
+    this.router.navigate(['/Home']);
+  }
 }
