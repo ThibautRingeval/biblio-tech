@@ -1,0 +1,69 @@
+<div class="container-xl">
+    <div class="table-responsive">
+      <div class="table-wrapper">
+        <div class="table-title">
+          <div class="row">
+            <div class="col-sm-6">
+              <h4><b>New book</b></h4>
+            </div>
+            <div class="col-sm-6">
+              <a href="#" routerLink="/Home" class="btn btn-success back"><i class='fas fa-arrow-circle-left'></i>
+                 Back</a>
+            </div>
+          </div>
+        </div>
+        <form #booksForm="ngForm">
+          <div class="table-content">
+            <div class="form-group p-10 row">
+              <div class="col-sm-3">
+                <label for="booksTitle" class="p-t-b-10">Book Title<span class="requiredStar">*</span></label>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="booksTitle" required maxlength="255"
+                  [(ngModel)]="addbooksForm.booksTitle" name="booksTitle" #booksTitle="ngModel">
+                <div *ngIf="booksTitle.errors && isSubmitted" class="alert alert-danger validationError">
+                  <div [hidden]="!booksTitle.errors?.['required']">
+                    Book Title is required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group p-10 row">
+              <div class="col-sm-3">
+                <label for="Resume" class="p-t-b-10">Resume<span class="requiredStar">*</span></label>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="Resume" required maxlength="255"
+                  [(ngModel)]="addbooksForm.Resume" name="Resume" #Resume="ngModel">
+                <div *ngIf="Resume.errors && isSubmitted" class="alert alert-danger validationError">
+                  <div [hidden]="!Resume.errors?.['required']">
+                    Resume is required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group p-10 row">
+              <div class="col-sm-3">
+                <label class="p-t-b-10">Image<span class="requiredStar">*</span></label>
+              </div>
+              <div class="col-sm-9">
+                <textarea class="form-control" id="Image" required [(ngModel)]="addbooksForm.Image" name="Image"
+                  #Image="ngModel">></textarea>
+                <div *ngIf="Image.errors && isSubmitted" class="alert alert-danger validationError">
+                  <div [hidden]="!Image.errors?.['required']">
+                    Image is required
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="form-group p-10 row">
+              <div class="col-sm-3">
+                <label class="p-t-b-10">Phone<span class="requiredStar">*</span></label>
+              </div>
+          <div class="table-footer">
+            <button class="btn btn-success" (click)="Addbooks(booksForm.form.valid)">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
