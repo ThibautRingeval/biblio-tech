@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app.routes';  // Assurez-vous que le chemin d'accès est correct
 import { RouterModule } from '@angular/router'; // Importez RouterModule
 import { AppComponent } from './app.component';
+import { FormsModule } from '@angular/forms'; // Importez FormsModule
 import { HomeComponent } from './home/home.component';
 import { HttpProviderService } from './Service/http-provider.service';
 
@@ -13,6 +14,7 @@ import { HttpProviderService } from './Service/http-provider.service';
   ],
   imports: [
     BrowserModule,
+    FormsModule, // Importez FormsModule
     AppRoutingModule, // Importez le module de routage principal
     RouterModule // Importez RouterModule
   ],

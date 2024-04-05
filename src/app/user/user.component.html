@@ -1,0 +1,38 @@
+<div *ngFor="let user of users">
+  <ng-container *ngIf="user"> <!-- Vérification de nullité -->
+    <span>{{ user.email }}</span>
+    <span>{{ user.password }}</span>
+    <span>{{ user.firstname }}</span>
+    <span>{{ user.lastname }}</span>
+    <span>{{ user.role }}</span>
+    <button (click)="startEditUser(user)">Modifier</button>
+    <button (click)="deleteUser(user.id)">Supprimer</button>
+  </ng-container>
+</div>
+
+<div *ngIf="isEditing">
+  <form (submit)="updateUser()">
+    <input type="text" [(ngModel)]="selectedUser.email">
+    <input type="text" [(ngModel)]="selectedUser.firstname">
+    <input type="text" [(ngModel)]="selectedUser.lastname">
+    <input type="password" [(ngModel)]="selectedUser.password">
+    <select [(ngModel)]="selectedUser.role">
+      <option value="user">Utilisateur</option>
+      <option value="admin">Administrateur</option>
+    </select>
+    <button type="submit">Enregistrer</button>
+    <button type="button" (click)="cancelEditUser()">Annuler</button>
+  </form>
+</div>
+
+<form (submit)="createUser()">
+  <input type="text" [(ngModel)]="newUser.email" placeholder="Email">
+  <input type="text" [(ngModel)]="newUser.firstname" placeholder="Prénom">
+  <input type="text" [(ngModel)]="newUser.lastname" placeholder="Nom">
+  <input type="password" [(ngModel)]="newUser.password" placeholder="Mot de passe">
+  <select [(ngModel)]="newUser.role">
+    <option value="user">Utilisateur</option>
+    <option value="admin">Administrateur</option>
+  </select>
+  <button type="submit">Ajouter</button>
+</form>
